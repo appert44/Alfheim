@@ -1,4 +1,4 @@
-# -*- coding: utf-8- -*-
+# -*- coding: utf-8 -*-
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
@@ -8,4 +8,3 @@ class Task(models.Model):
 
     def __unicode__(self):
         return u'Task %d : %s' % (self.id, self.content)
-# Create your models here.
