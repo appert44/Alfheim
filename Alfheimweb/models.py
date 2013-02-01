@@ -8,10 +8,10 @@ class Capture(models.Model):
 		('temp', 'Temperature'),
 		('presence', 'Presence'),
 	)
-	#time = models.DateTimeField()
+	time = models.DateTimeField()
 	sensor_type = models.CharField(max_length=8, choices=SENSOR_TYPES)
-	#device_sn = models.CharField(max_length=45)
-	#value = models.FloatField(blank=True, default=None, null=True)
+	device_sn = models.CharField(max_length=45)
+	value = models.FloatField(blank=True, default=None, null=True)
 
 	class Meta:
 		ordering = ['-time', ]

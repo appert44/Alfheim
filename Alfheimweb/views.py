@@ -2,19 +2,17 @@
 from django.http import HttpResponse
 from django.views.generic import TemplateView
 from django.template.context import RequestContext
-from django.core.context_processors import csrf
-from django.shortcuts import render_to_response
 from django import forms
 from django.db import models
 
 import logging
 class TasksView(TemplateView):
-	logging.info('affichage Template')
+
 	template_name="Alfheimweb/Alfheimweb.html"
 
 
 class MeasureForm(forms.Form):
-	#time = forms.DateTimeField(required=False)
+	time = forms.DateTimeField(required=False)
 	sensor_type = forms.CharField(max_length=8)
 	device_sn = forms.CharField(required=False,max_length=45)
 	value = forms.FloatField(required=False)
