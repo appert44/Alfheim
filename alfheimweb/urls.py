@@ -8,6 +8,7 @@ from alfheimweb.views import *
 
 urlpatterns = patterns('',
                        url(r'^$', Login.as_view(), name='login'),
+                       url(r'^main', Main.as_view(), name='main'),
                        url(r'^admin/', include(admin.site.urls)),
                        url(r'^measure', 'alfheimweb.views.measure'),
                        )

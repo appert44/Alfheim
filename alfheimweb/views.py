@@ -8,6 +8,9 @@ from django.db import models
 
 class Login(TemplateView):
     template_name = "alfheimweb/login.html"
+    
+class Main(TemplateView):
+    template_name = "alfheimweb/main.html"
 
 
 class MeasureForm(forms.Form):
