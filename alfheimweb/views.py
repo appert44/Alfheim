@@ -8,6 +8,7 @@ from django.contrib.auth import authenticate, login
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
+from raven.contrib.django.models import client
 
 class Login(TemplateView):
     template_name = "alfheimweb/login.html"
