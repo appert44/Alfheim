@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html>
+<head>
+ 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel='stylesheet' href='/static/alfheimweb/style.css'>
+
+	<title>Projet Alfheim</title>
+ <title>
+  Projet Alfheim
+ </title>
+</head>
+<body>
+ 
+  {% if form.errors %}
+    <p class="error">Sorry, that's not a valid username or password</p>
+  {% endif %}
+ 
+  <form action="/alfheimweb/test/" method="post">
+    <label for="username">Username:</label>
+    <input type="text" name="username" value="" id="username">
+    <label for="password">Password:</label>
+    <input type="password" name="password" value="" id="password">
+ 
+    <input type="submit" value="login" />
+  </form>
+ 
+</body>
+</html>

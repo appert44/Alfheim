@@ -1,0 +1,16 @@
+div.global {
+	text-align:center;
+}
+
+div.labels {
+	text-align:center;
+	width:20%;
+	background-color:#C0F000;
+	margin-left:72%;
+	vertical-align: middle;
+	
+	border-left:1px solid #000000;
+	border-right:1px solid #000000;
+	border-bottom:1px solid #000000;
+	border-top:1px solid #000000;
+}
