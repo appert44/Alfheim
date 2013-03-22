@@ -7,6 +7,12 @@ from django.db import models
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
 from django.shortcuts import render_to_response
+<<<<<<< HEAD
+=======
+from django.http import HttpResponseRedirect
+from django.contrib.auth.decorators import login_required
+from raven.contrib.django.models import client
+>>>>>>> 1867b9ea36a1588b59cd2e93dff6c5cf0ce6a91e
 
 
 class Login(TemplateView):
