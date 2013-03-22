@@ -5,7 +5,7 @@ from django.template.context import RequestContext
 from django import forms
 from django.db import models
 from django.contrib.auth import authenticate
-from django.contrib.auth import login as auth_loin
+from django.contrib.auth import login as auth_login
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
