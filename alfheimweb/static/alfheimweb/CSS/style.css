@@ -2,6 +2,14 @@ div.global {
 	text-align:center;
 }
 
+div.accueil {
+	float:left;
+}
+
+div.deconnect {
+	float: right;
+}
+
 div.presentation {
 	float:left;
 	clear: both;

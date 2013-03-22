@@ -7,8 +7,6 @@ from django.db import models
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
 from django.shortcuts import render_to_response
-from django.http import HttpResponseRedirect
-from django.contrib.auth.decorators import login_required
 
 
 class Login(TemplateView):
@@ -21,7 +19,7 @@ def login(request):
     if user is not None:
         if user.is_active:
             auth_login(request, user)
-            return render_to_response('alfheimweb/main.html')
+            return render_to_response('alfheimweb/main.html',context_instance=RequestContext(request))
         else:
             return HttpResponse('Compte inactif.')
     else:
@@ -30,7 +28,6 @@ def login(request):
 
 class Main(TemplateView):
     template_name = "alfheimweb/main.html"
-
 
 class MeasureForm(forms.Form):
     time = forms.DateTimeField(required=False)
