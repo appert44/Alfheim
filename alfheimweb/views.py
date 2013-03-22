@@ -4,13 +4,27 @@ from django.views.generic import TemplateView
 from django.template.context import RequestContext
 from django import forms
 from django.db import models
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate
+from django.contrib.auth import login as auth_loin
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 
 class Login(TemplateView):
     template_name = "alfheimweb/login.html"
+
+def login(request):
+    username = request.POST['username']
+    password = request.POST['password']
+    user = authenticate(username=username, password=password)
+    if user is not None:
+        if user.is_active:
+            auth_login(request, user)
+            return render_to_response('alfheimweb/main.html')
+        else:
+            return HttpResponse('Compte inactif.')
+    else:
+        return HttpResponse('Compte non reconnu.') 
     
 
 class Main(TemplateView):
@@ -41,15 +55,4 @@ def measure(request):
     #)
     return HttpResponse(status=201, content=instance.id)
 
-def login(request):
-    username = request.POST['username']
-    password = request.POST['password']
-    user = authenticate(username=username, password=password)
-    if user is not None:
-        if user.is_active:
-            login(request, user)
-            return HttpResponseRedirect('/main')
-        else:
-            return HttpResponse('Compte inactif.')
-    else:
-        return HttpResponse('Compte non reconnu.')
+
