@@ -11,11 +11,11 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': '',
-        'NAME': '',
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': '',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'alfheimdb',
+        'USER': 'alfheim',
+        'PASSWORD': 'django',
+        'HOST': 'localhost',
         'PORT': '',
     }
 }
@@ -149,5 +149,5 @@ LOGGING = {
         },
     }
 }
-import dj_database_url
-DATABASES['default'] =  dj_database_url.config()
+#import dj_database_url
+#DATABASES['default'] =  dj_database_url.config()
