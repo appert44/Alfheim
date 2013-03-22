@@ -1,0 +1,41 @@
+div.global {
+	text-align:center;
+}
+
+div.presentation {
+	float:left;
+	clear: both;
+	font-size: 24px;
+	margin-top:-37%;
+	color: #FF8C00;
+}
+
+div.thermometre {
+	float:left;
+	margin-left:44%;
+}
+
+div.infos {
+	clear: both;
+	pading:0.5em;
+	text-indent:8em;
+	float: left;
+	text-align: center;
+	font-size: 14px;
+	font-style: italic;
+	color: #808080;
+	margin-top: -16%;
+}
+
+div.labels {
+	text-align:center;
+	width:20%;
+	background-color:#C0C0C0;
+	margin-left:77%;
+	margin-top: 8%;
+	
+	border-left:1px solid #000000;
+	border-right:1px solid #000000;
+	border-bottom:1px solid #000000;
+	border-top:1px solid #000000;
+}
