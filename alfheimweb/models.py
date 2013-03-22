@@ -2,7 +2,6 @@
 from django.db import models
 from django import forms
 from django.forms import ModelForm, PasswordInput
-from raven.contrib.django.models import client
 import datetime
 
 

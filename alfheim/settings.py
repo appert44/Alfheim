@@ -114,7 +114,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.django.raven_compat'
+    'raven.contrib.django.raven_compat',
     'alfheimweb',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
