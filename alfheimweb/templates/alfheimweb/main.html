@@ -16,7 +16,32 @@
 </head>
 <body>
 
-<h1>Welcome </h1>
+<div class="accueil">
+
+{% if user.is_authenticated %}
+	Bienvenue dans votre espace personnel {{ user.username }},
+{% else %}
+    Merci de vous connecter.
+{% endif %}
+
+</div>
+
+<div class="deconnect">
+<input type="button" value="Déconnexion" />
+</div>
+
+ <div class="labels">
+                <span></span><h2>Graphique</h2></br>
+	
+<form name="myform" action="http://www.mydomain.com/myformhandler.cgi" method="POST">
+
+<input type="checkbox" name="option1" value="crit_period"> Périodes Critiques<br>
+<input type="checkbox" name="option2" value="human_presence"> Présence humaine<br>
+<br>
+
+</form>
+
+ </div>
 
 
 </body>
