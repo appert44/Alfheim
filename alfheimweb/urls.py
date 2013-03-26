@@ -20,6 +20,6 @@ urlpatterns = patterns('',
                        url(r'^admin/', include(admin.site.urls)),
                        url(r'^registration/', 'alfheimweb.views.login'),
                        #url(r'^exit/', 'alfheimweb.views.login'),
-                       url(r'^exit/$', 'django.contrib.auth.views.logout'),
+                       url(r'^exit/$', 'django.contrib.auth.views.logout',dict(template_name = 'alfheimweb/login.html',),),
                        url(r'^measure', 'alfheimweb.views.measure'),
                        )
