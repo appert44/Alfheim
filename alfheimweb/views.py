@@ -11,6 +11,8 @@ from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from raven.contrib.django.models import client
+from chartit import DataPool, Chart
+from models import Capture
 
 
 class Login(TemplateView):
@@ -35,6 +37,40 @@ class Notlogged(TemplateView):
 
 class Main(TemplateView):
     template_name = "alfheimweb/main.html"
+    
+def measure_chart_view(request):
+    #Step 1: Create a DataPool with the data we want to retrieve.
+    measuredata = \
+        DataPool(
+           series=
+            [{'options': {
+               'source': Capture.objects.all()},
+              'terms': [
+                'time',
+                'value']}
+             ])
+
+    #Step 2: Create the Chart object
+    cht = Chart(
+            datasource = measuredata,
+            series_options =
+              [{'options':{
+                  'type': 'line',
+                  'stacking': False},
+                'terms':{
+                  'time': [
+                    'value']
+                  }}],
+            chart_options =
+              {'title': {
+                   'text': 'Weather Data of Boston and Houston'},
+               'xAxis': {
+                    'title': {
+                       'text': 'Month number'}}})
+
+    #Step 3: Send the chart object to the template.
+    return render_to_response('alfheimweb/main.html', {'capturechart': cht})
+    
 
 
 class MeasureForm(forms.Form):

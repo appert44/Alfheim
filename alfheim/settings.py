@@ -1,5 +1,8 @@
 # Django settings for alfheim project.
 
+import os
+PROJECT_ROOT = os.path.dirname(__file__) + '/..'
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -68,6 +71,7 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    os.path.join(PROJECT_ROOT, 'alfheimweb/static/'),
 )
 
 # List of finder classes that know how to find static files in
@@ -110,6 +114,7 @@ TEMPLATE_DIRS = (
     #like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    os.path.join(PROJECT_ROOT, 'templates'),
 )
 
 INSTALLED_APPS = (
@@ -120,6 +125,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'raven.contrib.django.raven_compat',
+    'chartit',
     'alfheimweb',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
