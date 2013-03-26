@@ -28,23 +28,19 @@ def login(request):
             return HttpResponse('Compte inactif.')
     else:
         return HttpResponse('Compte non reconnu.') 
-    
-class Test(TemplateView):
-    template_name = "alfheimweb/test.html"
 
 
 class Main(TemplateView):
     template_name = "alfheimweb/main.html"
     
 def logout_view(request):
-    logout(request.user)
+    logout(request)
 
 class MeasureForm(forms.Form):
     time = forms.DateTimeField(required=False)
     sensor_type = forms.CharField(max_length=8)
     device_sn = forms.CharField(required=False, max_length=45)
     value = forms.FloatField(required=False)
-
 
 def measure(request):
     #import ipdb
