@@ -32,9 +32,7 @@ def login(request):
 
 class Main(TemplateView):
     template_name = "alfheimweb/main.html"
-    
-def logout_view(request):
-    logout(request)
+
 
 class MeasureForm(forms.Form):
     time = forms.DateTimeField(required=False)
