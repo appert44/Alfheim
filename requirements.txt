@@ -13,3 +13,4 @@ wsgiref==0.1.2
 ipdb
 raven
 newrelic
+django_chartit
