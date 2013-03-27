@@ -29,7 +29,7 @@ def login(request):
         else:
             return HttpResponse('Compte inactif.')
     else:
-        return HttpResponse('Compte non reconnu.') 
+        return render_to_response('alfheimweb/unknown.html') 
 
 class Notlogged(TemplateView):
     template_name = "alfheimweb/notlogged.html"

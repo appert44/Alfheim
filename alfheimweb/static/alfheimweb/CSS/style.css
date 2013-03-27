@@ -6,7 +6,22 @@ div.accueil {
 	float:left;
 }
 
-div.deconnect {
+div.redirect {
+	text-align: center;
+	font-style: italic;
+}
+
+div.unknown {
+	text-align: center;
+	font-weight: bold;
+}
+
+div.disconnected {
+	text-align: center;
+	font-weight: bold;
+}
+
+div.disconnect {
 	float: right;
 }
 
