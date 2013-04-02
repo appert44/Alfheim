@@ -50,6 +50,19 @@ div.infos {
 	margin-top: -16%;
 }
 
+#choices {
+	text-align:center;
+	width:20%;
+	background-color:#C0C0C0;
+	margin-left:77%;
+	margin-top: 8%;
+	
+	border-left:1px solid #000000;
+	border-right:1px solid #000000;
+	border-bottom:1px solid #000000;
+	border-top:1px solid #000000;
+}
+
 div.labels {
 	text-align:center;
 	width:20%;
@@ -62,3 +75,13 @@ div.labels {
 	border-bottom:1px solid #000000;
 	border-top:1px solid #000000;
 }
+
+#placeholder {
+	margin-left:3%;
+	margin-top:0%;
+	float: left;
+	clear: both;
+	width:1000px;
+	height:470px;
+}
+	
