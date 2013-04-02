@@ -11,9 +11,9 @@ from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from raven.contrib.django.models import client
-from BeautifulSoup import BeautifulSoup
-import urllib2
-import json
+#from BeautifulSoup import BeautifulSoup
+#import urllib2
+#import json
 from django import template
 from alfheimweb.models import *
 
