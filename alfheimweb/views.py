@@ -11,12 +11,12 @@ from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from raven.contrib.django.models import client
-#from BeautifulSoup import BeautifulSoup
-#import urllib2
-#import json
+from BeautifulSoup import BeautifulSoup 
+import urllib2
+import json
 from django import template
 from alfheimweb.models import *
-
+from django.template import Context, loader
 
 class Login(TemplateView):
     template_name = "alfheimweb/login.html"
@@ -28,14 +28,12 @@ def login(request):
     if user is not None:
         if user.is_active:
             auth_login(request, user)
-            return render_to_response('alfheimweb/main.html',context_instance=RequestContext(request))
-            #device_sn='0001'
-            #measures = Capture.objects.raw('SELECT value FROM alfheimweb_capture;')
-            #measures = Capture.objects.filter(device_sn = '0001')
-            #measures ="[21,25,163,145]"
-            #data = json.dumps(measures)
-           # return render_to_response('alfheimweb/main.html',{'measures':measures},context_instance=RequestContext(request))
-        
+            output = '['
+            for p in Capture.objects.all():
+                output += str(p.display())[:-1]
+            output += ']'
+            return render_to_response('alfheimweb/main.html', output,context_instance=RequestContext(request))
+           
         else:
             return HttpResponse('Compte inactif.')
     else:

@@ -15,7 +15,9 @@ class Capture(models.Model):
     sensor_type = models.CharField(max_length=8, choices=SENSOR_TYPES)
     device_sn = models.CharField(max_length=45)
     value = models.FloatField(blank=True, default=None, null=True)
-
+    
+    def display(self):
+        return u'[{0}, {1}],'.format(self.time, self.value)
     class Meta:
         ordering = ['-time', ]
 
