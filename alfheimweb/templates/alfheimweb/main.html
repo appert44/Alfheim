@@ -66,16 +66,8 @@
 
 $(function () {
 	var datasets = [{ label: "température intérieure",
-<<<<<<< HEAD
-data: {{measure}} },
-=======
-data: [[14, 19],
-['1-5', 18],
-[16, 19],
-[17, 21],
-[18, 21],
-[19, 23]] },
->>>>>>> 68f6fcdb5c180ce5d980991ab76b859b3d4abec1
+
+data: {% autoescape off %} {{measure}} } {% endautoescape %}
 
 { label: "température extérieure",
 data: [[14, 9],
@@ -115,7 +107,9 @@ data: [[14, 9],
 
         if (data.length > 0)
             $.plot($("#placeholder"), data, {
-                yaxis: { min: 0 },
+                yaxis: { min: 0 
+                		 mode: time
+                		 timeformat: "%y/%m/%d"},
                 xaxis: { tickDecimals: 0 }
             });
     }
