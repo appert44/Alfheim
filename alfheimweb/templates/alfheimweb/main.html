@@ -34,18 +34,14 @@
 
     <p id="choices">Options:</p>
     
-    
-    
+<script language="javascript" type="text/javascript">
+{% autoescape off %}
+	var dataRows = {{measure}};
+{% endautoescape %}
 
-<script type="text/javascript">
 $(function () {
 	var datasets = [{ label: "température intérieure",
-data: [[14, 19],
-[15, 18],
-[16, 19],
-[17, 21],
-[18, 21],
-[19, 23]] },
+data: {{measure}} },
 
 { label: "température extérieure",
 data: [[14, 9],

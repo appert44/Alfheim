@@ -12,8 +12,6 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from raven.contrib.django.models import client
 from BeautifulSoup import BeautifulSoup 
-import urllib2
-import json
 from django import template
 from alfheimweb.models import *
 from django.template import Context, loader
@@ -30,15 +28,22 @@ def login(request):
             auth_login(request, user)
             output = '['
             for p in Capture.objects.all():
-                output += str(p.display())[:-1]
-            output += ']'
-            return render_to_response('alfheimweb/main.html', output,context_instance=RequestContext(request))
+                output += str(p.display())
+            output = output[:-1]+']'
+            return render_to_response('alfheimweb/main.html', {'measure':output})
+           # return render_to_response('alfheimweb/main.html', output)
            
         else:
             return HttpResponse('Compte inactif.')
     else:
         return render_to_response('alfheimweb/unknown.html') 
-    
+def get_graph(request):
+    output = '['
+    for p in Capture.objects.all():
+        output += str(p.display())[:-1]
+    output += ']'
+    print(output)
+    return render_to_response(output)
 
 
 class Notlogged(TemplateView):

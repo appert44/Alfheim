@@ -17,7 +17,7 @@ class Capture(models.Model):
     value = models.FloatField(blank=True, default=None, null=True)
     
     def display(self):
-        return u'[{0}, {1}],'.format(self.time, self.value)
+        return u'["{0}", {1}],'.format(self.time, self.value)
     class Meta:
         ordering = ['-time', ]
 
