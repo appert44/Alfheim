@@ -30,16 +30,13 @@ def login(request):
             for p in Capture.objects.all():
                 output += str(p.display())
             output = output[:-1]+']'
-
             print(output)
-
-           
             return render_to_response('alfheimweb/main.html' ,{'measure':output} ,context_instance=RequestContext(request))
-            
         else:
             return HttpResponse('Compte inactif.')
     else:
-        return render_to_response('alfheimweb/unknown.html') 
+        return render_to_response('alfheimweb/unknown.html')
+     
 def get_graph(request):
     output = '['
     for p in Capture.objects.all():

@@ -60,16 +60,9 @@
     </div>
     
 <script language="javascript" type="text/javascript">
-{% autoescape off %}
-	var dataRows = {{measure}};
-{% endautoescape %}
 
 $(function () {
-	var datasets = [{ label: "température intérieure",
-
-
-data: {% autoescape off %} {{measure}} } {% endautoescape %}
-
+	var datasets = [
 
 { label: "température extérieure",
 data: [[14, 9],
