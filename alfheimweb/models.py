@@ -3,6 +3,7 @@ from django.db import models
 from django import forms
 from django.forms import ModelForm, PasswordInput
 from raven.contrib.django.models import client
+from django.utils.dateformat import format
 import datetime
 
 
@@ -17,7 +18,8 @@ class Capture(models.Model):
     value = models.FloatField(blank=True, default=None, null=True)
     
     def display(self):
-        return u'["{0}", {1}],'.format(self.time, self.value)
+        time= format(self.time, u'U')
+        return u'[{0}, {1}],'.format(time, self.value)
     class Meta:
         ordering = ['-time', ]
 
