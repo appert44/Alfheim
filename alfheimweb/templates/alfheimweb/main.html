@@ -60,16 +60,10 @@
     </div>
     
 <script language="javascript" type="text/javascript">
-{% autoescape off %}
-	var dataRows = {{measure}};
-{% endautoescape %}
 
 $(function () {
 	var datasets = [{ label: "température intérieure",
-
-
-data: {% autoescape off %} {{measure}} } {% endautoescape %}
-
+data:{% autoescape off %} {{measure}} }, {% endautoescape %}
 
 { label: "température extérieure",
 data: [[14, 9],
@@ -109,9 +103,7 @@ data: [[14, 9],
 
         if (data.length > 0)
             $.plot($("#placeholder"), data, {
-                yaxis: { min: 0 
-                		 mode: time
-                		 timeformat: "%y/%m/%d"},
+                yaxis: { min: 0 },
                 xaxis: { tickDecimals: 0 }
             });
     }
