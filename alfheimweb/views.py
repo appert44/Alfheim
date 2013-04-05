@@ -30,9 +30,11 @@ def login(request):
             for p in Capture.objects.all():
                 output += str(p.display())
             output = output[:-1]+']'
-            return render_to_response('alfheimweb/main.html', {'measure':output})
+           # return render_to_response('alfheimweb/main.html', {'measure':output})
            # return render_to_response('alfheimweb/main.html', output)
            
+            return render_to_response('alfheimweb/main.html' ,{'measure':output} ,context_instance=RequestContext(request))
+            
         else:
             return HttpResponse('Compte inactif.')
     else:
