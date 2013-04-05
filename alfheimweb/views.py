@@ -30,13 +30,9 @@ def login(request):
             for p in Capture.objects.all():
                 output += str(p.display())
             output = output[:-1]+']'
-<<<<<<< HEAD
+
             print(output)
-            return render_to_response('alfheimweb/main.html', {'measure':output})
-=======
-           # return render_to_response('alfheimweb/main.html', {'measure':output})
->>>>>>> f3598691f4846bc7e9e70d0eb18467bd0f28a1c8
-           # return render_to_response('alfheimweb/main.html', output)
+
            
             return render_to_response('alfheimweb/main.html' ,{'measure':output} ,context_instance=RequestContext(request))
             
