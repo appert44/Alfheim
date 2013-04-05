@@ -4,6 +4,7 @@ div.global {
 
 div.accueil {
 	float:left;
+	font-style: italic;
 }
 
 div.redirect {
@@ -50,12 +51,12 @@ div.infos {
 	margin-top: -16%;
 }
 
-#choices {
+div.options {
 	text-align:center;
 	width:20%;
 	background-color:#C0C0C0;
 	margin-left:77%;
-	margin-top: 8%;
+	margin-top: 7%;
 	
 	border-left:1px solid #000000;
 	border-right:1px solid #000000;
@@ -84,4 +85,15 @@ div.labels {
 	width:1000px;
 	height:470px;
 }
-	
+
+#period {
+	text-decoration: underline;
+}
+
+#local {
+	text-decoration: underline;
+}
+
+#choices {
+	text-decoration: underline;
+}
