@@ -11,7 +11,7 @@ from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from raven.contrib.django.models import client
-from BeautifulSoup import BeautifulSoup 
+from BeautifulSoup import BeautifulSoup
 from django import template
 from alfheimweb.models import *
 from django.template import Context, loader
@@ -30,23 +30,20 @@ def login(request):
             for p in Capture.objects.all():
                 output += str(p.display())
             output = output[:-1]+']'
-
             print(output)
-
-           
-            return render_to_response('alfheimweb/main.html' ,{'measure':output} ,context_instance=RequestContext(request))
-            
+            return render_to_response('alfheimweb/main.html' ,context_instance=RequestContext(request))
         else:
             return HttpResponse('Compte inactif.')
     else:
-        return render_to_response('alfheimweb/unknown.html') 
+        return render_to_response('alfheimweb/unknown.html')
+     
 def get_graph(request):
-    output = '['
+    output = '[{ label: "température intérieure", data:['
     for p in Capture.objects.all():
-        output += str(p.display())[:-1]
-    output += ']'
+        output += str(p.display())
+    output = output[:-1]+']}]'
     print(output)
-    return render_to_response(output)
+    return HttpResponse(output)
 
 
 class Notlogged(TemplateView):
@@ -76,13 +73,13 @@ def measure(request):
     Capture = models.get_model('alfheimweb', 'Capture')
     instance = Capture.objects.create(**data)
     #instance = Capture.objects.create(
-    #    time = data['time'],
-    #   ...
+    # time = data['time'],
+    # ...
     #)
     return HttpResponse(status=201, content=instance.id)
 
 def graph(request):
-    #measures = Capture.objects.filter(sensor_sn)  
+    #measures = Capture.objects.filter(sensor_sn)
     #measures ="21,25,163,145"
     measures = Capture.objects.raw('SELECT value FROM alfheimweb_capture')
     #data = json.dumps(measures)
