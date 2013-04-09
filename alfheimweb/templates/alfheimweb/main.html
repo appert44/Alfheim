@@ -51,30 +51,41 @@
 	<input type="radio" name="period" value="last12m">12 derniers mois</br></br>
 	</form>
 	
-	<form action="/alfheimweb/refresh/" method="post">
+	<!--<form action=javascript.>
 		<input type="submit" value="Afficher" /></br>
 	</form>
+
     
+    <h2 onclick=javascript:temperature();>Refresh</h2>-->
+    <input type=button name='refreshbp' value="Refresh" onClick="temperature()" /> 
+
     <p id="choices">Options:</br></p>
     
     </div>
     
 <script language="javascript" type="text/javascript">
 
-$(function () {
+function temperature(){
+    $.ajax({
+            type:"POST",
+            url :"../graph/",
+            //data:"",
+            datatype:"json",
+            success: function(data) {
+               alert(data)
+               set_graph(data)
+           },
+           error:function(data) {
+               alert("error in getting from server")
+   		   }
+        });
+    };  
 
-	var datasets = [{ label: "température intérieure",
-data:{% autoescape off %} {{measure}} }, {% endautoescape %}
 
-{ label: "température extérieure",
-data: [[14, 9],
-[15, 13],
-[16, 8],
-[17, 6],
-[18, 6],
-[19, 5]] }];
+function set_graph(data){
+//$(function () {
 
-
+	var datasets = data;
 
 	var i = 0;
     $.each(datasets, function(key, val) {
@@ -111,23 +122,9 @@ data: [[14, 9],
 
     plotAccordingToChoices();
     
-    placeholder.resize(function () {
-			$(".message").text("Placeholder is now "
-				+ $(this).width() + "x" + $(this).height()
-				+ " pixels");
-		});
-
-		$(".placeholder").resizable({
-			maxWidth: 1000,
-			maxHeight: 470,
-			minWidth: 250,
-			minHeight: 118,
-		});
-
-  
-    
-});
-
+}
+//}
+set_graph();
   
 
 </script>
