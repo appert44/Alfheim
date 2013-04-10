@@ -1,17 +1,16 @@
 # -*- coding: utf-8 -*-
-from django.http import HttpResponse
 from django.views.generic import TemplateView
 from django.template.context import RequestContext
 from django import forms
 from django.db import models
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
-from django.contrib.auth import logout
+#from django.contrib.auth import logout
+from django.http import HttpResponse
 from django.shortcuts import render_to_response
-from django.http import HttpResponseRedirect
-from django.contrib.auth.decorators import login_required
-from raven.contrib.django.models import client
-from BeautifulSoup import BeautifulSoup 
+#from django.http import HttpResponseRedirect
+#from raven.contrib.django.models import client
+from BeautifulSoup import BeautifulSoup
 from django import template
 from alfheimweb.models import *
 from django.template import Context, loader
@@ -26,11 +25,6 @@ def login(request):
     if user is not None:
         if user.is_active:
             auth_login(request, user)
-            output = '['
-            for p in Capture.objects.all():
-                output += str(p.display())
-            output = output[:-1]+']'
-            print(output)
             return render_to_response('alfheimweb/main.html' ,context_instance=RequestContext(request))
         else:
             return HttpResponse('Compte inactif.')
@@ -73,15 +67,7 @@ def measure(request):
     Capture = models.get_model('alfheimweb', 'Capture')
     instance = Capture.objects.create(**data)
     #instance = Capture.objects.create(
-    #    time = data['time'],
-    #   ...
+    # time = data['time'],
+    # ...
     #)
-    return HttpResponse(status=201, content=instance.id)
-
-def graph(request):
-    #measures = Capture.objects.filter(sensor_sn)  
-    #measures ="21,25,163,145"
-    measures = Capture.objects.raw('SELECT value FROM alfheimweb_capture')
-    #data = json.dumps(measures)
-    return render_to_response('alfheimweb/main.html',{'measures':measures})
-        
+    return HttpResponse(status=201, content=instance.id)      
