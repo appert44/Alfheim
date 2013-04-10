@@ -15,6 +15,8 @@ from django import template
 from alfheimweb.models import *
 from django.template import Context, loader
 
+import json
+
 class Login(TemplateView):
     template_name = "alfheimweb/login.html"
 
@@ -32,12 +34,13 @@ def login(request):
         return render_to_response('alfheimweb/unknown.html')
      
 def get_graph(request):
-    output = '[{ label: "température intérieure", data:['
-    for p in Capture.objects.all():
-        output += str(p.display())
-    output = output[:-1]+']}]'
-    print(output)
-    return HttpResponse(output)
+
+    data = list()
+    for capture in Capture.objects.all().order_by('time'):
+        data.append(capture.display())
+    result = [{'label': u"température intérieure", 'data': data}]
+    # print(output)
+    return HttpResponse(json.dumps(result), content_type="application/json")
 
 
 class Notlogged(TemplateView):
@@ -64,6 +67,12 @@ def measure(request):
     #form is valid
     data = form.cleaned_data
 
+    
+    Device = models.get_model('alfheimweb', 'Device')
+    device, created = Device.objects.get_or_create(serial_number=data['device_sn'])
+    
+    del data['device_sn']
+    data['device'] = device
     Capture = models.get_model('alfheimweb', 'Capture')
     instance = Capture.objects.create(**data)
     #instance = Capture.objects.create(

@@ -67,12 +67,12 @@
 
 function temperature(){
     $.ajax({
-            type:"POST",
-            url :"../graph/",
+            type:"GET",
+            url :"/alfheimweb/graph/",
             //data:"",
             datatype:"json",
             success: function(data) {
-               alert(data)
+               //alert(data)
                set_graph(data)
            },
            error:function(data) {
