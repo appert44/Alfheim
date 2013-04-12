@@ -11,7 +11,8 @@ class CaptureAdmin(admin.ModelAdmin):
 admin.site.register(models.get_model('alfheimweb', 'Capture'), CaptureAdmin)
 
 class DeviceAdmin(admin.ModelAdmin):
-	pass
+    list_display = ('serial_number', 'user', )
+    list_filter = ('serial_number', )
 
 
 admin.site.register(models.get_model('alfheimweb', 'Device'), DeviceAdmin)
