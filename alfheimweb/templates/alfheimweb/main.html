@@ -125,7 +125,7 @@ function set_graph(data){
         if (data.length > 0)
             $.plot($("#placeholder"), data, {
                 yaxis: { min: 0 },
-                xaxis: {  }
+                xaxis: {  tickDecimals: 0  }
             });
     }
 

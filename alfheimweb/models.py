@@ -18,12 +18,11 @@ class Device(models.Model):
     def __unicode__(self):
         return u"Device %s" % self.serial_number
     
-class Capture(models.Model):
+class TableBrut(models.Model):
     SENSOR_TYPES = (
         ('temp', 'Temperature'),
         ('presence', 'Presence'),
     )
-    #username = models.ForeignKey(User)
     time = models.DateTimeField()
     sensor_type = models.CharField(max_length=8, choices=SENSOR_TYPES)
     
@@ -37,7 +36,49 @@ class Capture(models.Model):
         
     class Meta:
         ordering = ['-time', ]
-        
+class H_agregation(models.Model):
+    SENSOR_TYPES = (
+        ('temp', 'Temperature'),
+        ('presence', 'Presence'),
+    )
+    time = models.DateTimeField()
+    sensor_type = models.CharField(max_length=8, choices=SENSOR_TYPES)
+    
+    value = models.FloatField(blank=True, default=None, null=True)
+    device = models.ForeignKey(Device)
+
+class D_agregation(models.Model):
+    SENSOR_TYPES = (
+        ('temp', 'Temperature'),
+        ('presence', 'Presence'),
+    )
+    time = models.DateTimeField()
+    sensor_type = models.CharField(max_length=8, choices=SENSOR_TYPES)
+    
+    value = models.FloatField(blank=True, default=None, null=True)
+    device = models.ForeignKey(Device)
+    
+class M_agregation(models.Model):
+    SENSOR_TYPES = (
+        ('temp', 'Temperature'),
+        ('presence', 'Presence'),
+    )
+    time = models.DateTimeField()
+    sensor_type = models.CharField(max_length=8, choices=SENSOR_TYPES)
+    
+    value = models.FloatField(blank=True, default=None, null=True)
+    device = models.ForeignKey(Device)
+    
+class Y_agregation(models.Model):
+    SENSOR_TYPES = (
+        ('temp', 'Temperature'),
+        ('presence', 'Presence'),
+    )
+    time = models.DateTimeField()
+    sensor_type = models.CharField(max_length=8, choices=SENSOR_TYPES)
+    
+    value = models.FloatField(blank=True, default=None, null=True)
+    device = models.ForeignKey(Device)
 class LoginForm(forms.Form):
     username = forms.CharField(required = True)
     password = forms.PasswordInput(render_value = True)
