@@ -23,6 +23,19 @@ class LoginTest(TestCase):
         print('username: appert44 password: frey')
         print('status code = 200')
         response = c.post('/alfheimweb/registration/', {'username':'appert44','password':'frey'})
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)        
+        if response.status_code == 200:
+            print('.........OK!')
+        else:
+            print('.........FAIL!')
 
-      
+class DataBaseTest(TestCase):
+    def test_database(self):
+        datatest = TableBrut.objects.count()
+        print('TableBrut')
+        self.assertEqual(datatest, 0)
+        if datatest == 0:
+            print('.........OK!')
+        else:
+            print('.........FAIL!')
+        
