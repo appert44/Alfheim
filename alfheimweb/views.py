@@ -56,8 +56,6 @@ class MeasureForm(forms.Form):
     device_sn = forms.CharField(required=False, max_length=45)
     value = forms.FloatField(required=False)
     
-
-
 def measure(request):
     #import ipdb
     #ipdb.set_trace()
@@ -67,7 +65,7 @@ def measure(request):
     #form is valid
     data = form.cleaned_data
 
-    
+
     Device = models.get_model('alfheimweb', 'Device')
     device, created = Device.objects.get_or_create(serial_number=data['device_sn'])
     
