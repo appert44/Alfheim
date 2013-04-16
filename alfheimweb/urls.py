@@ -17,6 +17,7 @@ urlpatterns = patterns('',
                        url(r'^admin/', include(admin.site.urls)),
                        url(r'^registration/', 'alfheimweb.views.login'),
                        url(r'^graph/', 'alfheimweb.views.get_graph'),
+                       url(r'^sensors/', 'alfheimweb.views.get_sensors'),
                        url(r'^exit/$', 'django.contrib.auth.views.logout',dict(template_name = 'alfheimweb/notlogged.html',),),
                        url(r'^measure', 'alfheimweb.views.measure'),
                        )

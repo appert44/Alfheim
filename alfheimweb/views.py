@@ -42,6 +42,12 @@ def get_graph(request):
     # print(output)
     return HttpResponse(json.dumps(result), content_type="application/json")
 
+def get_sensors(request):
+    sensors_user = list ()
+    for device in Device.objects.all():
+        sensors_user.append(device.display())
+    result = [{'label': "66", 'data': sensors_user}]
+    return HttpResponse(json.dumps(result), content_type="application/json")
 
 class Notlogged(TemplateView):
     template_name = "alfheimweb/notlogged.html"
