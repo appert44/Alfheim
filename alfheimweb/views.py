@@ -36,7 +36,7 @@ def login(request):
 def get_graph(request):
 
     data = list()
-    for capture in Capture.objects.all().order_by('time'):
+    for capture in TableBrut.objects.all().order_by('time'):
         data.append(capture.display())
     result = [{'label': u"température intérieure", 'data': data}]
     # print(output)
@@ -73,9 +73,9 @@ def measure(request):
     
     del data['device_sn']
     data['device'] = device
-    Capture = models.get_model('alfheimweb', 'Capture')
-    instance = Capture.objects.create(**data)
-    #instance = Capture.objects.create(
+    TableBrut = models.get_model('alfheimweb', 'TableBrut')
+    instance = TableBrut.objects.create(**data)
+    #instance = TableBrut.objects.create(
     # time = data['time'],
     # ...
     #)

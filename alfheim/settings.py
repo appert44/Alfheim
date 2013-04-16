@@ -16,10 +16,10 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': '',
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': '',
+        'NAME': 'alfheimdb',
+        'USER': 'alfheim',
+        'PASSWORD': 'django',
+        'HOST': 'localhost',
         'PORT': '',
     }
 }
@@ -126,6 +126,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'raven.contrib.django.raven_compat',
+    'django_extensions',
     #'django_pdb',
     'alfheimweb',
     # Uncomment the next line to enable the admin:
@@ -162,5 +163,5 @@ LOGGING = {
         },
     }
 }
-import dj_database_url
-DATABASES['default'] =  dj_database_url.config()
+#import dj_database_url
+#DATABASES['default'] =  dj_database_url.config()
