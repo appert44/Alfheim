@@ -52,7 +52,6 @@
 	
 
     <input type=button name='refreshbp' value="Refresh" onClick="temperature()" /> 
-    <input type=button name='testbp' value="Test" onClick="sensors()" /> 
     <p id="choices">Courbes:</br></p>
     
     </div>
@@ -85,7 +84,7 @@ function temperature(){
                set_graph(temp)
            },
            error:function(temp) {
-               alert("error in getting from server")
+               alert("Error in getting from server !")
    		   }
         });
     };  
