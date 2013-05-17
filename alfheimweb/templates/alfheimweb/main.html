@@ -9,7 +9,6 @@
     <script language="javascript" type="text/javascript" src="/static/alfheimweb/js/jquery.flot.navigate.js"></script>
     <script language="javascript" type="text/javascript" src="/static/alfheimweb/js/jquery.flot.selection.js"></script>
     <script language="javascript" type="text/javascript" src="/static/alfheimweb/js/jquery.flot.crosshair.js"></script>
-    <script language="javascript" type="text/javascript" src="/static/alfheimweb/js/jquery.flot.resize.js"></script>
 <div class="logo">
         <img width="100%" height="160" src="/static/alfheimweb/images/fond_ciel.jpg" alt="Gestion energie">
 </div>
@@ -36,7 +35,7 @@
     <div class="options">
  	<p id="local">Localisation:</p>
     <form>
-    <select name="localisation" size="1">
+    <select id="localisation" size="1">
     <option>Maison Orvault
     <option>Maison Seychelles
     <option>Maison Corse
@@ -51,32 +50,41 @@
 	<input type="radio" name="period" value="last12m">12 derniers mois</br></br>
 	</form>
 	
-	<!--<form action=javascript.>
-		<input type="submit" value="Afficher" /></br>
-	</form>
 
-    
-    <h2 onclick=javascript:temperature();>Refresh</h2>-->
     <input type=button name='refreshbp' value="Refresh" onClick="temperature()" /> 
-
-    <p id="choices">Options:</br></p>
+    <p id="choices">Courbes:</br></p>
     
     </div>
     
+    <div id="test3000"></div></div>
 <script language="javascript" type="text/javascript">
+
+function sensors(){
+    $.ajax({
+            type:"GET",
+            url :"/alfheimweb/sensors/",
+            datatype:"json",
+            success: function(sens) {
+                //obj = JSON.parse(data);
+                document.getElementById('localisation').innerHTML = sens;
+           },
+           error:function(sens) {
+               alert("error in getting from server")
+           }
+        });
+    };  
+
 
 function temperature(){
     $.ajax({
             type:"GET",
             url :"/alfheimweb/graph/",
-            //data:"",
             datatype:"json",
-            success: function(data) {
-               alert(data)
-               set_graph(data)
+            success: function(temp) {
+               set_graph(temp)
            },
-           error:function(data) {
-               alert("error in getting from server")
+           error:function(temp) {
+               alert("Error in getting from server !")
    		   }
         });
     };  

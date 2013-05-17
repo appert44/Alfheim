@@ -12,6 +12,9 @@ class Device(models.Model):
     serial_number = models.CharField(max_length=45, primary_key=True)
     user = models.ForeignKey('auth.User', blank=True, null=True, default=None)
     
+    def display(self):
+        return self.serial_number
+    
     def __unicode__(self):
         return u"Device %s" % self.serial_number
     
