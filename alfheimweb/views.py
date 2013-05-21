@@ -39,7 +39,8 @@ def get_graph(request):
     data = list()
     for capture in TableBrut.objects.all().order_by('time'):
         data.append(capture.display())
-    result = [{'label': u"température intérieure", 'data': data}]
+    #result = [{'label': u"température intérieure", 'data': data}]
+    result = {'label': u"température intérieure", 'data': data}
     # print(output)
     return HttpResponse(json.dumps(result), content_type="application/json")
 
