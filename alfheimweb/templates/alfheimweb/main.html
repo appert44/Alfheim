@@ -6,7 +6,6 @@
     <link rel='stylesheet' href='/static/alfheimweb/CSS/style.css'>
     <script language="javascript" type="text/javascript" src="/static/alfheimweb/js/jquery.js"></script>
     <script language="javascript" type="text/javascript" src="/static/alfheimweb/js/jquery.flot.js"></script>
-    <script language="javascript" type="text/javascript" src="/static/alfheimweb/js/jquery.flot.autoscale.js"></script>
     <script language="javascript" type="text/javascript" src="/static/alfheimweb/js/jquery.flot.time.js"></script>
 <div class="logo">
         <img width="100%" height="160" src="/static/alfheimweb/images/fond_ciel.jpg" alt="Gestion energie">
@@ -50,7 +49,7 @@
 	</form>
 	
 
-    <input type=button name='refreshbp' value="Rafraichir !" onClick="temperature()" />
+    <input type=button id='refreshbp' value="Rafraichir !" onClick="temperature()" />
     </br></br>
     </div>
     
@@ -58,7 +57,7 @@
 
 
 
-function sensors(){
+/*function sensors(){
     $.ajax({
             type:"GET",
             url :"/alfheimweb/sensors/",
@@ -70,7 +69,7 @@ function sensors(){
                alert("error in getting from server")
            }
         });
-    };  
+    }; */ 
 
 
 
@@ -82,7 +81,7 @@ function temperature(){
             url :"/alfheimweb/graph/",
             datatype:"json",
             success: function(temp) {
-                set_graph(temp) 
+                set_graph(temp)
            },
            error:function(temp) {
                alert("Error in getting from server !")
@@ -91,9 +90,9 @@ function temperature(){
     };  
 
 
-function set_graph(data){
+/*function set_graph(temp){
 
-	var datasets = data;
+	var datasets = temp;
 	var i = 0;
     $.each(datasets, function(key, val) {
         val.color = i;
@@ -102,8 +101,8 @@ function set_graph(data){
     
     function createPlot() {
 
-        if (data.length > 0)
-            $.plot($("#flot_graph"), data, {
+        if (temp.length > 0)
+            $.plot($("#flot_graph"), temp, {
                 yaxis: { min: 0 },
                 xaxis: {
                   mode: "time",
@@ -115,8 +114,24 @@ function set_graph(data){
 
     createPlot();
     
+}*/
+
+function set_graph(temp) {
+  var plot,
+      container = $('#flot_graph'),
+      s1 = temp,
+      options = {
+        yaxis: { min: 0 },
+        xaxis: { mode: "time", timeformat: "%d-%b-%y %H:%M:%S"}},
+      series = [s1];
+
+
+  // plot the graph
+  plot = $.plot(container, series, options);
+
 }
-  
+
+
 </script>
 
 </body>
