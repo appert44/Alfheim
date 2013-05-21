@@ -33,7 +33,12 @@ class TableBrut(models.Model):
         # capture_time = format(self.time, u'U')
         capture_time = time.mktime(self.time.timetuple())
         return int(capture_time) , self.value
-        
+    
+    def val(self):
+        return self.value
+    def tps(self):
+        return self.time
+    
     class Meta:
         ordering = ['-time', ]
 class H_agregation(models.Model):
@@ -46,6 +51,10 @@ class H_agregation(models.Model):
     
     value = models.FloatField(blank=True, default=None, null=True)
     device = models.ForeignKey(Device)
+    def val(self):
+        return self.value
+    def tps(self):
+        return self.time
 
 class D_agregation(models.Model):
     SENSOR_TYPES = (

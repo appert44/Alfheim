@@ -15,6 +15,7 @@ from django import template
 from alfheimweb.models import *
 from django.template import Context, loader
 
+import datetime
 import json
 
 class Login(TemplateView):
@@ -71,7 +72,6 @@ def measure(request):
     #form is valid
     data = form.cleaned_data
 
-
     Device = models.get_model('alfheimweb', 'Device')
     device, created = Device.objects.get_or_create(serial_number=data['device_sn'])
     
@@ -84,3 +84,38 @@ def measure(request):
     # ...
     #)
     return HttpResponse(status=201, content=instance.id)      
+
+class Agregation(forms.Form):
+    template_name = "alfheimweb/main.html"
+def h_agrege(request):
+
+    if H_agregation.objects.count() == 0:
+        for lastline in TableBrut.objects.all().order_by('time'):
+            responce = lastline.tps()
+
+            
+        #responce = TableBrut.objects.all()
+    else:
+        for lastline in H_agregation.objects.all().order_by('time'):
+            responce = lastline.tps()
+    
+  #  h_agrega = 0
+ #   for testtablebrut in TableBrut.objects.all():
+ #       h_agrega = h_agrega + testtablebrut.val()
+ #   h_nbrow = TableBrut.objects.count()
+ #   responce = h_agrega / h_nbrow
+    
+    return HttpResponse(responce)
+       
+    
+    
+    
+    
+
+
+
+
+
+
+
+    
