@@ -14,6 +14,8 @@ from BeautifulSoup import BeautifulSoup
 from django import template
 from alfheimweb.models import *
 from django.template import Context, loader
+from django.db.models import Q
+from django_cron import CronJobBase, Schedule
 
 import datetime
 import json
@@ -86,28 +88,29 @@ def measure(request):
     #)
     return HttpResponse(status=201, content=instance.id)      
 
-class Agregation(forms.Form):
-    template_name = "alfheimweb/main.html"
-def h_agrege(request):
+class Agregation(CronJobBase):
+    RUN_AT_TIMES = ['00:02', '01:09', '02:02', '03:02', '04:02', '05:02', '06:02', '07:02', '08:02', '09:02', '10:02']
+    def h_agrege(self):
+        if H_agregation.objects.count() == 0:
+            for lastline in TableBrut.objects.all().order_by('time'):
+                lasttps = lastline.tps()
+            H_startTime= datetime.datetime(lasttps.year, lasttps.month, lasttps.day, lasttps.hour, 00, 00)
+            H_endTime= datetime.datetime(lasttps.year, lasttps.month, lasttps.day, lasttps.hour, 59, 59)
+        else:
+            for lastline in H_agregation.objects.all().order_by('time'):
+                lasttps = lastline.tps()
+            H_startTime= datetime.datetime(lasttps.year, lasttps.month, lasttps.day, lasttps.hour, 00, 00)
+            H_endTime= datetime.datetime(lasttps.year, lasttps.month, lasttps.day, lasttps.hour, 59, 59)
+        h_agrega = 0
+  #  for testtablebrut in TableBrut.objects.get(time >= H_startTime | time <= H_endTime):
+    #for h_create in TableBrut.objects.filter(time =[Q(H_startTime), Q(H_endTime)]):
+        for h_create in TableBrut.objects.filter(Q(time__gte=H_startTime) | Q(time__lte=H_endTime)):
+            h_agrega = h_agrega + h_create.val()
+        h_nbrow = TableBrut.objects.count()
+        h_final = h_agrega / h_nbrow
+        H_agregation.objects.create(time=H_startTime, value=h_final,device_id="001",sensor_type="temp")
 
-    if H_agregation.objects.count() == 0:
-        for lastline in TableBrut.objects.all().order_by('time'):
-            responce = lastline.tps()
-
-            
-        #responce = TableBrut.objects.all()
-    else:
-        for lastline in H_agregation.objects.all().order_by('time'):
-            responce = lastline.tps()
-    
-  #  h_agrega = 0
- #   for testtablebrut in TableBrut.objects.all():
- #       h_agrega = h_agrega + testtablebrut.val()
- #   h_nbrow = TableBrut.objects.count()
- #   responce = h_agrega / h_nbrow
-    
-    return HttpResponse(responce)
-       
+    schedule = Schedule(run_at_times=RUN_AT_TIMES)       
     
     
     
