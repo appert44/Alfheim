@@ -41,11 +41,11 @@
     
     <p id="period">P&eacuteriode:</br></p>
     
-	<input type="radio" name="period" value="last24h">24 dernières heures</br>
-	<input type="radio" name="period" value="last7d">7 derniers jours</br>
-	<input type="radio" name="period" value="last31d">31 derniers jours</br>
-	<input type="radio" name="period" value="last3m">3 derniers mois</br>
-	<input type="radio" name="period" value="last12m">12 derniers mois</br></br>
+	<input type="radio" name="last24h" checked="checked" value="last24h">24 dernières heures</br>
+	<input type="radio" name="last7d" value="last7d">7 derniers jours</br>
+	<input type="radio" name="last31d" value="last31d">31 derniers jours</br>
+	<input type="radio" name="last3m" value="last3m">3 derniers mois</br>
+	<input type="radio" name="last12m" value="last12m">12 derniers mois</br></br>
 	</form>
 	
 
@@ -90,27 +90,19 @@ function temperature(){
     };  
 
 
-/*function set_graph(temp){
-
-	var datasets = temp;
-	var i = 0;
-    $.each(datasets, function(key, val) {
-        val.color = i;
-        ++i;
-    });
     
-    function createPlot() {
+/*function set_graph(temp) {
 
-        if (temp.length > 0)
-            $.plot($("#flot_graph"), temp, {
-                yaxis: { min: 0 },
-                xaxis: {
-                  mode: "time",
-                  timeformat: "%d-%b-%y %H:%M:%S"
-
-                    }
-            });
-    }
+        $.plot($("#flot_graph"), [{
+            data: temp,
+            //lines: { show: true, steps: false },
+           // points: { show: true }            
+        }],
+        {
+            grid: { hoverable: true, clickable: true },
+            xaxis: { mode: "time", timeformat: "%d-%b-%y %H:%M:%S" }
+        }
+    );
 
     createPlot();
     
@@ -121,15 +113,40 @@ function set_graph(temp) {
       container = $('#flot_graph'),
       s1 = temp,
       options = {
+        lines: { show: true, steps: false },
+        points: { show: true },
+        grid: { hoverable: true, clickable: true },
         yaxis: { min: 0 },
         xaxis: { mode: "time", timeformat: "%d-%b-%y %H:%M:%S"}},
       series = [s1];
 
-
-  // plot the graph
   plot = $.plot(container, series, options);
 
 }
+
+
+
+    /*$.plot("#flot_graph", temp, {
+      xaxis: { mode: "time" }
+    });
+
+    $('.series_check:checked').click(function () {
+      $.plot("#placeholder", [d], {
+        xaxis: { mode: "time" }
+      });
+    });
+
+    $("#nineties").click(function () {
+      $.plot("#placeholder", [d], {
+        xaxis: {
+          mode: "time",
+          min: (new Date(1990, 0, 1)).getTime(),
+          max: (new Date(2000, 0, 1)).getTime()
+        }
+      });
+    });*/
+
+
 
 
 </script>

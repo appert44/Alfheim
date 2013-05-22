@@ -32,7 +32,7 @@ class TableBrut(models.Model):
 
     def display(self):
         # capture_time = format(self.time, u'U')
-        capture_time = time.mktime(self.time.timetuple())
+        capture_time = (time.mktime(self.time.timetuple())*1000)
         return int(capture_time) , self.value
         
     class Meta:
