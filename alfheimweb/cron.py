@@ -5,8 +5,9 @@ from alfheimweb.models import *
 import datetime
 
 class Agregation(CronJobBase):
-    RUN_AT_TIMES = ['00:02', '01:23', '02:02', '03:02', '04:02', '05:02', '06:02', '07:02', '08:02', '09:02', '10:02']
+    RUN_AT_TIMES = ['00:02', '01:23', '02:02', '03:02', '04:02', '05:02', '06:02', '07:02', '08:02', '11:09', '11:11']
     schedule = Schedule(run_at_times=RUN_AT_TIMES) 
+    ALLOW_PARALLEL_RUNS = True
     code = "alfheimweb.Agregation"
     def do(self):
         if H_agregation.objects.count() == 0:
