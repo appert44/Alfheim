@@ -52,10 +52,17 @@ class H_agregation(models.Model):
     
     value = models.FloatField(blank=True, default=None, null=True)
     device = models.ForeignKey(Device)
+    
+    def display(self):
+        # capture_time = format(self.time, u'U')
+        capture_time = (time.mktime(self.time.timetuple())*1000)
+        return int(capture_time) , self.value 
+    
     def val(self):
         return self.value
     def tps(self):
         return self.time
+
 
 class D_agregation(models.Model):
     SENSOR_TYPES = (
@@ -68,6 +75,17 @@ class D_agregation(models.Model):
     value = models.FloatField(blank=True, default=None, null=True)
     device = models.ForeignKey(Device)
     
+    def display(self):
+        # capture_time = format(self.time, u'U')
+        capture_time = (time.mktime(self.time.timetuple())*1000)
+        return int(capture_time) , self.value
+    
+    def val(self):
+        return self.value
+    def tps(self):
+        return self.time
+    
+    
 class M_agregation(models.Model):
     SENSOR_TYPES = (
         ('temp', 'Temperature'),
@@ -79,6 +97,17 @@ class M_agregation(models.Model):
     value = models.FloatField(blank=True, default=None, null=True)
     device = models.ForeignKey(Device)
     
+    def display(self):
+        # capture_time = format(self.time, u'U')
+        capture_time = (time.mktime(self.time.timetuple())*1000)
+        return int(capture_time) , self.value
+    
+    def val(self):
+        return self.value
+    def tps(self):
+        return self.time
+    
+    
 class Y_agregation(models.Model):
     SENSOR_TYPES = (
         ('temp', 'Temperature'),
@@ -89,6 +118,18 @@ class Y_agregation(models.Model):
     
     value = models.FloatField(blank=True, default=None, null=True)
     device = models.ForeignKey(Device)
+    
+    def display(self):
+        # capture_time = format(self.time, u'U')
+        capture_time = (time.mktime(self.time.timetuple())*1000)
+        return int(capture_time) , self.value
+    
+    def val(self):
+        return self.value
+    def tps(self):
+        return self.time
+    
+    
 class LoginForm(forms.Form):
     username = forms.CharField(required = True)
     password = forms.PasswordInput(render_value = True)
