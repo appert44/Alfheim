@@ -16,10 +16,10 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': '',
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': '',
+        'NAME': 'alfheimdb',
+        'USER': 'alfheim',
+        'PASSWORD': 'django',
+        'HOST': 'localhost',
         'PORT': '',
     }
 }
@@ -104,8 +104,8 @@ MIDDLEWARE_CLASSES = (
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
-CRON_CLASSES = [
-    "alfheimweb.cron.Agregation",
+CRONJOBS = [
+    ('*/1 * * * *', 'alfheimweb.cron.Agregation'),
     # ...
 ]
 ROOT_URLCONF = 'alfheim.urls'
@@ -129,7 +129,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'raven.contrib.django.raven_compat',
-    'django_cron',
+    'django_crontab',
     #'django_pdb',
     'alfheimweb',
     # Uncomment the next line to enable the admin:
@@ -166,5 +166,5 @@ LOGGING = {
         },
     }
 }
-import dj_database_url
-DATABASES['default'] =  dj_database_url.config()
+#import dj_database_url
+#DATABASES['default'] =  dj_database_url.config()
