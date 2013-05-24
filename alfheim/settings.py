@@ -105,7 +105,7 @@ MIDDLEWARE_CLASSES = (
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 CRONJOBS = [
-    ('*/1 * * * *', 'alfheimweb.cron.Agregation'),
+    ('*/5 * * * *', 'alfheimweb.cron.Agregation'),
     # ...
 ]
 ROOT_URLCONF = 'alfheim.urls'
