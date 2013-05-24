@@ -5,7 +5,7 @@ from alfheimweb.models import *
 from django.http import HttpResponse
 import datetime
 
-def Agregation():
+def Agregation(self):
 #### agregation Hour
     H_startTime = None
     H_endTime = None
