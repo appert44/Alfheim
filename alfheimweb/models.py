@@ -26,7 +26,6 @@ class TableBrut(models.Model):
     )
     time = models.DateTimeField()
     sensor_type = models.CharField(max_length=8, choices=SENSOR_TYPES)
-    
     value = models.FloatField(blank=True, default=None, null=True)
     device = models.ForeignKey(Device)
 
@@ -39,6 +38,8 @@ class TableBrut(models.Model):
         return self.value
     def tps(self):
         return self.time
+    def option(self):
+        return self.device , self.sensor_type
     
     class Meta:
         ordering = ['-time', ]
