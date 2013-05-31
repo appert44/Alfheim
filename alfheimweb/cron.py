@@ -9,7 +9,6 @@ import datetime
 def Agregation(self):
     
     i = 0
-    h_nbrow = 0
     date = datetime.datetime.now()
 
     while i < 24:

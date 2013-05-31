@@ -44,7 +44,7 @@ def get_graph(request):
     if request.method == 'GET':
         choice = request.GET.get("choice")
         if choice == 'hour':
-            for capture in H_agregation.objects.all().order_by('time'):
+            for capture in H_agregation.objects.filter(sensor_type="temp").order_by('time'):
                 data.append(capture.display())
         elif choice == 'day':
             for capture in D_agregation.objects.all().order_by('time'):
