@@ -24,6 +24,5 @@ urlpatterns = patterns('',
                        url(r'^exit/$', 'django.contrib.auth.views.logout',dict(template_name = 'alfheimweb/notlogged.html',),),
                        url(r'^measure', 'alfheimweb.views.measure'),
                        url(r'^h', 'alfheimweb.cron.Agregation'),
-                       url(r'^t', 'alfheimweb.cron.Agregation_sec'),
 
                        )

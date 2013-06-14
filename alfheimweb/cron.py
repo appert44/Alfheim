@@ -53,12 +53,7 @@ def Agregation(self):
     d_temp_nbrow = TableBrut.objects.filter(Q(time__gte=d_startTime), Q(time__lte=d_endTime), Q(sensor_type="temp")).count()
     d_prec_nbrow = TableBrut.objects.filter(Q(time__gte=d_startTime), Q(time__lte=d_endTime), Q(sensor_type="presence")).count()
 
-def Agregation_sec(self):
-    for capteur_list in TableBrut.objects.filter(Q(sensor_type="temp")):
-        date = datetime.datetime(capteur_list.tps().year, capteur_list.tps().month, capteur_list.tps().day, capteur_list.tps().hour, 00, 00)
-        agregation = H_agregation.object.filter()
-        
-    return HttpResponse(date)
+
     
     
     
