@@ -8,14 +8,16 @@ import datetime
 
 def Agregation(self):
     
-    i = 0
+    h = 0
+    d = 0
+    
     date = datetime.datetime.now()
 
-    while i < 24:
+    while h < 24:
         h_prec_agrega = 0
         h_temp_agrega = 0
-        H_startTime= datetime.datetime(date.year, date.month, (date.day-1), i, 00, 00)
-        H_endTime= datetime.datetime(date.year, date.month, (date.day-1), i, 59, 59)
+        H_startTime= datetime.datetime(date.year, date.month, (date.day-1), h, 00, 00)
+        H_endTime= datetime.datetime(date.year, date.month, (date.day-1), h, 59, 59)
         #recherche des valeurs suivant les parametres 
         for h_create in TableBrut.objects.filter(Q(time__gte=H_startTime), Q(time__lte=H_endTime), Q(sensor_type="temp")):
             h_temp_agrega = h_temp_agrega + h_create.val()
@@ -35,9 +37,24 @@ def Agregation(self):
             h_prec_final = h_prec_agrega / h_prec_nbrow
         H_agregation.objects.create(time=H_startTime, value=h_temp_final,device_id="001",sensor_type="temp")
         H_agregation.objects.create(time=H_startTime, value=h_prec_final,device_id="001",sensor_type="presence")
-        i = i + 1
+        h = h + 1
+        
+    while d < 30:
+        d_temp_agrega = 0
+        d_prec_agrega = 0
+        
+        d_startTime= datetime.datetime(date.year, date.month, (date.day-1), 00, 00, 00)
+        d_endTime= datetime.datetime(date.year, date.month, (date.day-1), 23, 59, 59) 
 
-    
+        for d_create in TableBrut.objects.filter(Q(time__gte=d_startTime), Q(time__lte=d_endTime), Q(sensor_type="temp")):
+            d_temp_agrega = d_temp_agrega + d_create.val()
+        for d_create in TableBrut.objects.filter(Q(time__gte=d_startTime), Q(time__lte=d_endTime), Q(sensor_type="presence")):
+            d_temp_agrega = d_temp_agrega + d_create.val()    
+            
+        d_temp_nbrow = TableBrut.objects.filter(Q(time__gte=d_startTime), Q(time__lte=d_endTime), Q(sensor_type="temp")).count()
+        d_prec_nbrow = TableBrut.objects.filter(Q(time__gte=d_startTime), Q(time__lte=d_endTime), Q(sensor_type="presence")).count()
+        
+    return HttpResponse(date)
     
     
     

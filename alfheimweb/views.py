@@ -47,13 +47,13 @@ def get_graph(request):
             for capture in H_agregation.objects.filter(sensor_type="temp").order_by('time'):
                 data.append(capture.display())
         elif choice == 'day':
-            for capture in D_agregation.objects.all().order_by('time'):
+            for capture in D_agregation.objects.filter(sensor_type="temp").order_by('time'):
                 data.append(capture.display())
         elif choice == 'month':
-            for capture in M_agregation.objects.all().order_by('time'):
+            for capture in M_agregation.objects.filter(sensor_type="temp").order_by('time'):
                 data.append(capture.display())
         elif choice == 'year':
-            for capture in Y_agregation.objects.all().order_by('time'):
+            for capture in Y_agregation.objects.filter(sensor_type="temp").order_by('time'):
                 data.append(capture.display())
         result = {'label': u"température intérieure", 'data': data}
         return HttpResponse(json.dumps(result), content_type="application/json")
