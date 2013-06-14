@@ -19,7 +19,6 @@
  {% else %}
     Merci de vous connecter.
  {% endif %}
-
 </div>
 
 <div class="disconnect">
@@ -34,9 +33,9 @@
  	<p id="local">Localisation:</p>
     <form>
     <select id="localisation" size="1">
-    <option>Maison Orvault
-    <option>Maison Seychelles
-    <option>Maison Corse
+    <option>
+    <option>
+    <option>
     </select>
     
     <p id="period">P&eacuteriode:</br></p>
@@ -48,75 +47,95 @@
 	</form>
 	
 
-    <input type=button id='refreshbp' value="Rafraichir !" onClick="temperature()" />
+    <input type=button id='refreshbp' value="Rafraichir !" onClick="evenement()" /></br>
     </br></br>
     </div>
     
 <script language="javascript" type="text/javascript">
 
+s1 = null
+s2 = null
+
+
+function evenement(){
+
+                temperature()
+                presence()
+                //sensors()
+                set_graph()
+
+           };
+
+
+
 
 /*function sensors(){
     $.ajax({
             type:"GET",
-            url :"/alfheimweb/sensors/",
+            url :"/alfheimweb/sensors/?user_connected={{ user.username }}",
+            //changer le type dela variable de l'utilisateur qu'on envoie, il faut mettre autre chose à la place du int
             datatype:"json",
             success: function(sens) {
-                document.getElementById('localisation').innerHTML = sens;
+                alert("win")
            },
            error:function(sens) {
                alert("error in getting from server")
            }
         });
-    }; */ 
+    };*/
+
+          
 
 
 function temperature(){
 
     $.ajax({
             type:"GET",
-            url :"/alfheimweb/graph/?choice=" + $('input[type=radio][name=intervalle_tps]:checked').attr('value'),
+            url :"/alfheimweb/temperature/?choice=" + $('input[type=radio][name=intervalle_tps]:checked').attr('value'),
             datatype:"json",
             success: function(temp) {
-                set_graph(temp)
+                //set_graph(temp)
+                s1 = temp
            },
            error:function(temp) {
                alert("Error in getting from server !")
    		   }
         });
-    };  
+    };
 
-function set_graph(temp) {
+
+function presence(){
+
+    $.ajax({
+            type:"GET",
+            url :"/alfheimweb/presence/?choice=" + $('input[type=radio][name=intervalle_tps]:checked').attr('value'),
+            datatype:"json",
+            success: function(pres) {
+                //set_graph(pres)
+                s2 = pres
+           },
+           error:function(pres) {
+               alert("Error in getting from server !")
+         }
+        });
+    };
+
+
+
+function set_graph() {
   var plot,
       container = $('#flot_graph'),
-      s1 = temp,
       options = {
         lines: { show: true, steps: false },
         points: { show: true },
         grid: { hoverable: true, clickable: true },
         yaxis: { min: 0 },
         xaxis: { mode: "time", timeformat: "%d-%b-%y %H:%M:%S"}},
-      series = [s1];
+      series = [s1, s2];
 
   plot = $.plot(container, series, options);
 
 }
-  
-/*function set_graph(temp) {
-
-        $.plot($("#flot_graph"), [{
-            data: temp,
-            //lines: { show: true, steps: false },
-           // points: { show: true }            
-        }],
-        {
-            grid: { hoverable: true, clickable: true },
-            xaxis: { mode: "time", timeformat: "%d-%b-%y %H:%M:%S" }
-        }
-    );
-
-    createPlot();   
-}*/
-
 
 
 </script>
