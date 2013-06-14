@@ -39,7 +39,7 @@ def login(request):
         return render_to_response('alfheimweb/unknown.html')
 
 
-def get_graph(request):
+def get_temp(request):
     data = list()
     if request.method == 'GET':
         choice = request.GET.get("choice")
@@ -60,15 +60,40 @@ def get_graph(request):
     else:
         return HttpResponse(status=400)
 
+def get_pres(request):
+    data = list()
+    if request.method == 'GET':
+        choice = request.GET.get("choice")
+        if choice == 'hour':
+            for capture in H_agregation.objects.filter(sensor_type="presence").order_by('time'):
+                data.append(capture.display())
+        elif choice == 'day':
+            for capture in D_agregation.objects.filter(sensor_type="presence").order_by('time'):
+                data.append(capture.display())
+        elif choice == 'month':
+            for capture in M_agregation.objects.filter(sensor_type="presence").order_by('time'):
+                data.append(capture.display())
+        elif choice == 'year':
+            for capture in Y_agregation.objects.filter(sensor_type="presence").order_by('time'):
+                data.append(capture.display())
+        result = {'label': u"présence humaine", 'data': data}
+        return HttpResponse(json.dumps(result), content_type="application/json")
+    else:
+        return HttpResponse(status=400)
+
+
+
 
 def get_sensors(request):
     sensors_user = list()
-    for device in Device.objects.all():
-        sensors_user.append(device.display())
-    #result = [{'label': "sensors", 'data': sensors_user}]
-    result = {'data': sensors_user}
-    return HttpResponse(json.dumps(result), content_type="application/json")
-
+    if request.method == 'GET':
+        user_connected = request.GET.get("user_connected")
+        for device in Device.objects.filter(user=user_connected):
+            sensors_user.append(device.display())
+            result = [{'label': "sensors", 'data': sensors_user}]
+            return HttpResponse(json.dumps(result), content_type="application/json")
+    else:
+        return HttpResponse(status=400)
 
 class Notlogged(TemplateView):
     template_name = "alfheimweb/notlogged.html"

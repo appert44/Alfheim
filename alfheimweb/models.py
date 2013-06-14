@@ -30,7 +30,6 @@ class TableBrut(models.Model):
     device = models.ForeignKey(Device)
 
     def display(self):
-        # capture_time = format(self.time, u'U')
         capture_time = (time.mktime(self.time.timetuple())*1000)
         return int(capture_time) , self.value
     
