@@ -39,20 +39,24 @@ def Agregation(self):
         H_agregation.objects.create(time=H_startTime, value=h_prec_final,device_id="001",sensor_type="presence")
         h = h + 1
         
-    while d < 30:
-        d_temp_agrega = 0
-        d_prec_agrega = 0
-        
-        d_startTime= datetime.datetime(date.year, date.month, (date.day-1), 00, 00, 00)
-        d_endTime= datetime.datetime(date.year, date.month, (date.day-1), 23, 59, 59) 
+ 
+    d_temp_agrega = 0
+    d_prec_agrega = 0
+    d_startTime= datetime.datetime(date.year, date.month, (date.day-1), 00, 00, 00)
+    d_endTime= datetime.datetime(date.year, date.month, (date.day-1), 23, 59, 59) 
 
-        for d_create in TableBrut.objects.filter(Q(time__gte=d_startTime), Q(time__lte=d_endTime), Q(sensor_type="temp")):
-            d_temp_agrega = d_temp_agrega + d_create.val()
-        for d_create in TableBrut.objects.filter(Q(time__gte=d_startTime), Q(time__lte=d_endTime), Q(sensor_type="presence")):
-            d_temp_agrega = d_temp_agrega + d_create.val()    
+    for d_create in TableBrut.objects.filter(Q(time__gte=d_startTime), Q(time__lte=d_endTime), Q(sensor_type="temp")):
+        d_temp_agrega = d_temp_agrega + d_create.val()
+    for d_create in TableBrut.objects.filter(Q(time__gte=d_startTime), Q(time__lte=d_endTime), Q(sensor_type="presence")):
+        d_temp_agrega = d_temp_agrega + d_create.val()    
             
-        d_temp_nbrow = TableBrut.objects.filter(Q(time__gte=d_startTime), Q(time__lte=d_endTime), Q(sensor_type="temp")).count()
+    d_temp_nbrow = TableBrut.objects.filter(Q(time__gte=d_startTime), Q(time__lte=d_endTime), Q(sensor_type="temp")).count()
         d_prec_nbrow = TableBrut.objects.filter(Q(time__gte=d_startTime), Q(time__lte=d_endTime), Q(sensor_type="presence")).count()
+
+def Agregation_sec(self):
+    for capteur_list in TableBrut.objects.filter(Q(sensor_type="temp")):
+        date = datetime.datetime(capteur_list.tps().year, capteur_list.tps().month, capteur_list.tps().day, capteur_list.tps().hour, 00, 00)
+        agregation = H_agregation.object.filter()
         
     return HttpResponse(date)
     
